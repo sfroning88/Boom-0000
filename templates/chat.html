@@ -70,8 +70,9 @@
                     </div>
                   </div>
                   <div id="action-buttons" style="width: 100%; max-width: 800px; display: flex; align-items: center; gap: 1em; background: #23272f; border-radius: 16px; padding: 1em; justify-content: flex-end; margin-left: auto;">
-                    <button id="BUTTON_FUNCTION_ONE" class="btn btn-primary" style="margin: 0; background: #007bff; border: none; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold;">Button Function One</button>
-                    <button id="BUTTON_FUNCTION_TWO" class="btn btn-primary" style="margin: 0; background: #ff0000; border: none; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold;">Button Function Two</button>
+                    <button id="BUTTON_FUNCTION_ONE" class="btn btn-primary" style="margin: 0; background: #000000; border: none; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold;">Button Function One</button>
+                    <button id="BUTTON_FUNCTION_TWO" class="btn btn-primary" style="margin: 0; background: #000000; border: none; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold;">Button Function Two</button>
+                    <button id="BUTTON_FUNCTION_THREE" class="btn btn-primary" style="margin: 0; background: #000000; border: none; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold;">Button Function Three</button>
                     <div class="img_cont_msg" style="margin-left: 12px;">
                       <img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">
                     </div>
@@ -84,6 +85,8 @@
     </div>
 
     <script>
+      var chatCounter = 0;
+      
       function scrollToBottom() {
         setTimeout(function() {
           var chatContainer = $('#chat-messages').parent();
@@ -95,10 +98,13 @@
         // Scroll to bottom on page load
         scrollToBottom();
         $('#BUTTON_FUNCTION_ONE').on('click', function() {
+          chatCounter++;
+          var currentChatId = 'call-status-' + chatCounter;
+          
           // Show user message bubble
           $('#chat-messages').append(
             '<div class="d-flex mb-3 justify-content-end">' +
-              '<div class="p-3 rounded" style="background: #007bff; color: #fff; border-radius: 16px 16px 4px 16px; max-width: 80%;">' +
+              '<div class="p-3 rounded" style="background: #000000; color: #fff; border-radius: 16px 16px 4px 16px; max-width: 80%;">' +
                 '<span style="font-weight: bold;">You</span><br>' +
                 'Button Function One' +
               '</div>' +
@@ -114,7 +120,7 @@
               '<img src="https://media.licdn.com/dms/image/v2/D560BAQHK10HmqRh1rQ/company-logo_200_200/company-logo_200_200/0/1701815665068/wealthboom_logo?e=1755129600&v=beta&t=0RhPS_izHlCe2NRvKtO7mgT7LXo6T87muFlK-HR_noE" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">' +
             '</div>' +
             '<div class="p-3 rounded" style="background: #23272f; color: #fff; border-radius: 16px 16px 16px 4px; max-width: 80%;">' +
-              '<b>BOOM Assistant</b><br><span id="call-status">Loading button function one...</span>' +
+              '<b>BOOM Assistant</b><br><span id="' + currentChatId + '">Loading button function one...</span>' +
             '</div>' +
           '</div>');
           $('#chat-messages').append(botBubble);
@@ -128,22 +134,25 @@
             type: 'POST',
             success: function (data) {
               if (data.success) {
-                $('#call-status').html('<span style="color: limegreen;">Button Function One success!</span>');
+                $('#' + currentChatId).html('<span style="color: limegreen;">Button Function One success!</span>');
               } else {
-                $('#call-status').html('<span style="color: red;">Button Function One failure.</span>');
+                $('#' + currentChatId).html('<span style="color: red;">Button Function One failure.</span>');
               }
             },
             error: function () {
-              $('#call-status').html('<span style="color: red;">Button Function One error.</span>');
+              $('#' + currentChatId).html('<span style="color: red;">Button Function One error.</span>');
             }
           });
         });
 
         $('#BUTTON_FUNCTION_TWO').on('click', function() {
+          chatCounter++;
+          var currentChatId = 'call-status-' + chatCounter;
+          
           // Show user message bubble
           $('#chat-messages').append(
             '<div class="d-flex mb-3 justify-content-end">' +
-              '<div class="p-3 rounded" style="background: #007bff; color: #fff; border-radius: 16px 16px 4px 16px; max-width: 80%;">' +
+              '<div class="p-3 rounded" style="background: #000000; color: #fff; border-radius: 16px 16px 4px 16px; max-width: 80%;">' +
                 '<span style="font-weight: bold;">You</span><br>' +
                 'Button Function Two' +
               '</div>' +
@@ -159,7 +168,7 @@
               '<img src="https://media.licdn.com/dms/image/v2/D560BAQHK10HmqRh1rQ/company-logo_200_200/company-logo_200_200/0/1701815665068/wealthboom_logo?e=1755129600&v=beta&t=0RhPS_izHlCe2NRvKtO7mgT7LXo6T87muFlK-HR_noE" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">' +
             '</div>' +
             '<div class="p-3 rounded" style="background: #23272f; color: #fff; border-radius: 16px 16px 16px 4px; max-width: 80%;">' +
-              '<b>BOOM Assistant</b><br><span id="call-status">Loading button function two...</span>' +
+              '<b>BOOM Assistant</b><br><span id="' + currentChatId + '">Loading button function two...</span>' +
             '</div>' +
           '</div>');
           $('#chat-messages').append(botBubble);
@@ -173,18 +182,21 @@
             type: 'POST',
             success: function (data) {
               if (data.success) {
-                $('#call-status').html('<span style="color: limegreen;">Button Function Two success!</span>');
+                $('#' + currentChatId).html('<span style="color: limegreen;">Button Function Two success!</span>');
               } else {
-                $('#call-status').html('<span style="color: red;">Button Function Two failure.</span>');
+                $('#' + currentChatId).html('<span style="color: red;">Button Function Two failure.</span>');
               }
             },
             error: function () {
-              $('#call-status').html('<span style="color: red;">Button Function Two error.</span>');
+              $('#' + currentChatId).html('<span style="color: red;">Button Function Two error.</span>');
             }
           });
         });
-        
+
         $('#BUTTON_FUNCTION_THREE').on('click', function() {
+          chatCounter++;
+          var currentChatId = 'call-status-' + chatCounter;
+          
           // Show user message bubble
           $('#chat-messages').append(
             '<div class="d-flex mb-3 justify-content-end">' +
@@ -204,7 +216,7 @@
               '<img src="https://media.licdn.com/dms/image/v2/D560BAQHK10HmqRh1rQ/company-logo_200_200/company-logo_200_200/0/1701815665068/wealthboom_logo?e=1755129600&v=beta&t=0RhPS_izHlCe2NRvKtO7mgT7LXo6T87muFlK-HR_noE" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">' +
             '</div>' +
             '<div class="p-3 rounded" style="background: #23272f; color: #fff; border-radius: 16px 16px 16px 4px; max-width: 80%;">' +
-              '<b>BOOM Assistant</b><br><span id="call-status">Loading button function three...</span>' +
+              '<b>BOOM Assistant</b><br><span id="' + currentChatId + '">Loading button function three...</span>' +
             '</div>' +
           '</div>');
           $('#chat-messages').append(botBubble);
@@ -212,19 +224,19 @@
           // Scroll to bottom
           scrollToBottom();
 
-          // BUTTON FUNCTION TWO
+          // BUTTON FUNCTION THREE
           $.ajax({
             url: '/BUTTON_FUNCTION_THREE',
             type: 'POST',
             success: function (data) {
               if (data.success) {
-                $('#call-status').html('<span style="color: limegreen;">Button Function Three success!</span>');
+                $('#' + currentChatId).html('<span style="color: limegreen;">Button Function Three success!</span>');
               } else {
-                $('#call-status').html('<span style="color: red;">Button Function Three failure.</span>');
+                $('#' + currentChatId).html('<span style="color: red;">Button Function Three failure.</span>');
               }
             },
             error: function () {
-              $('#call-status').html('<span style="color: red;">Button Function Three error.</span>');
+              $('#' + currentChatId).html('<span style="color: red;">Button Function Three error.</span>');
             }
           });
         });
