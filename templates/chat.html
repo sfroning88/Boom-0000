@@ -183,6 +183,51 @@
             }
           });
         });
+        
+        $('#BUTTON_FUNCTION_THREE').on('click', function() {
+          // Show user message bubble
+          $('#chat-messages').append(
+            '<div class="d-flex mb-3 justify-content-end">' +
+              '<div class="p-3 rounded" style="background: #000000; color: #fff; border-radius: 16px 16px 4px 16px; max-width: 80%;">' +
+                '<span style="font-weight: bold;">You</span><br>' +
+                'Button Function Three' +
+              '</div>' +
+              '<div class="img_cont_msg" style="margin-left: 12px;">' +
+                '<img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">' +
+              '</div>' +
+            '</div>'
+          );
+
+          // Show bot response
+          var botBubble = $('<div class="d-flex mb-3">' +
+            '<div class="img_cont_msg" style="margin-right: 12px;">' +
+              '<img src="https://media.licdn.com/dms/image/v2/D560BAQHK10HmqRh1rQ/company-logo_200_200/company-logo_200_200/0/1701815665068/wealthboom_logo?e=1755129600&v=beta&t=0RhPS_izHlCe2NRvKtO7mgT7LXo6T87muFlK-HR_noE" class="rounded-circle user_img_msg" style="width: 40px; height: 40px; object-fit: cover;">' +
+            '</div>' +
+            '<div class="p-3 rounded" style="background: #23272f; color: #fff; border-radius: 16px 16px 16px 4px; max-width: 80%;">' +
+              '<b>BOOM Assistant</b><br><span id="call-status">Loading button function three...</span>' +
+            '</div>' +
+          '</div>');
+          $('#chat-messages').append(botBubble);
+
+          // Scroll to bottom
+          scrollToBottom();
+
+          // BUTTON FUNCTION TWO
+          $.ajax({
+            url: '/BUTTON_FUNCTION_THREE',
+            type: 'POST',
+            success: function (data) {
+              if (data.success) {
+                $('#call-status').html('<span style="color: limegreen;">Button Function Three success!</span>');
+              } else {
+                $('#call-status').html('<span style="color: red;">Button Function Three failure.</span>');
+              }
+            },
+            error: function () {
+              $('#call-status').html('<span style="color: red;">Button Function Three error.</span>');
+            }
+          });
+        });
       });
     </script>
     <style>
