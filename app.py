@@ -26,6 +26,14 @@ def BUTTON_FUNCTION_TWO():
     
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_THREE', methods=['POST'])
+def BUTTON_FUNCTION_THREE():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Three success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
     
 if __name__ == '__main__':
     if len(sys.argv) != 1:
