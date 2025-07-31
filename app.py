@@ -81,4 +81,4 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # run the app
-    app.run(debug=True)
+    app.run(debug=True, port=5000)
