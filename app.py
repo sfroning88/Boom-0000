@@ -34,6 +34,46 @@ def BUTTON_FUNCTION_THREE():
     
     except Exception as e:
         return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_FOUR', methods=['POST'])
+def BUTTON_FUNCTION_FOUR():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Four success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_FIVE', methods=['POST'])
+def BUTTON_FUNCTION_FIVE():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Five success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_SIX', methods=['POST'])
+def BUTTON_FUNCTION_SIX():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Six success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_SEVEN', methods=['POST'])
+def BUTTON_FUNCTION_SEVEN():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Seven success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
+
+@app.route('/BUTTON_FUNCTION_EIGHT', methods=['POST'])
+def BUTTON_FUNCTION_EIGHT():
+    try:
+        return jsonify({'success': True, 'message': 'Button Function Eight success.'}), 200
+    
+    except Exception as e:
+        return jsonify({'success': False, 'message': str(e)}), 400
     
 if __name__ == '__main__':
     if len(sys.argv) != 1:
