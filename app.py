@@ -1,9 +1,13 @@
 import os, sys
 from flask import Flask, render_template, request, jsonify
+from ngrok import connect
 
 # create a Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'default_secret_key')
+
+# get the Ngrok token
+ngrok_token = os.environ.get('NGROK_API_TOKEN')
 
 @app.route('/')
 def home():
@@ -80,5 +84,38 @@ if __name__ == '__main__':
         print("Usage: python3 app.py")
         sys.exit(1)
 
+    # ngrok tunnel URL (will be set when tunnel is created)
+    ngrok_url = None
+
+    # Check if ngrok is available and create tunnel
+    import importlib.util
+    ngrok_spec = importlib.util.find_spec("ngrok")
+    
+    if ngrok_spec is None:
+        print("ERROR: ngrok package not available")
+        sys.exit(1)
+
+    # Authenticate with ngrok using environment token
+    if ngrok_token is None:
+        print("ERROR: Please set your ngrok token")
+        sys.exit(1)
+    
+    from ngrok import set_auth_token
+    set_auth_token(ngrok_token)
+
+    from ngrok import connect
+    tunnel = connect(5000, domain="guiding-needlessly-mallard.ngrok-free.app")
+
+    if tunnel is None:
+        print("ERROR: Failed to connect to ngrok tunnel, check active instances")
+        sys.exit(1)
+
+    print("##############################_APP_BEGIN_##############################")
+
+    # Static domain is configured in api/connect.py
+    print(f"CHECKPOINT: Using static domain: https://guiding-needlessly-mallard.ngrok-free.app/oauth/callback")
+
+    print("##############################_APP_END_##############################")
+
     # run the app
-    app.run(debug=True, port=5000)
+    app.run(port=5000)
