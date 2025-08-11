@@ -1,3 +1,3 @@
 # Default-Demo
-Simple Flask template for rapid demoing features
+Simple Flask/Ngrok template for rapid demoing features
 Starting point for future tool development.
